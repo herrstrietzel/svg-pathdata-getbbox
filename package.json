@@ -11,5 +11,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "herrstrietzel",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "svg",
+    "pathdata",
+    "bounding-box"
+  ]
 }
