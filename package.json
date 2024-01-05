@@ -1,12 +1,13 @@
 {
   "name": "svg-pathdata-getbbox",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "parse pathdata and get bounding box",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+github.com:herrstrietzel/svg-pathdata-getbbox.git"
+    "url": "git+https://github.com/herrstrietzel/svg-pathdata-getbbox.git"
   },
+  "homepage": "https://github.com/herrstrietzel/svg-pathdata-getbbox",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
