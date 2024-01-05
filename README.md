@@ -1,5 +1,5 @@
 # svg-pathdata-getbbox
-Calculate a path bounding box based on its pathdata.  
+Calculates a path bounding box based on its raw pathdata.  
 
 Some libraries fail at parsing all possible shorthand notations – most notably the (quite questionable) ability to concanenate `A` arcto `largeArc`, `sweep` and final point:  
 
@@ -7,13 +7,14 @@ Some libraries fail at parsing all possible shorthand notations – most notably
 A 5 10 45 1 0 40 20
 ```
 
-can also be expressed as
+can also be expressed like so
 
 ```
 A 5 10 45 1040 20
 ```
 
-... pretty hard to unravel
+... pretty hard to unravel – I don't blame anyone.
+
 
 ## Usage - node.js
 
