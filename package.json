@@ -1,0 +1,11 @@
+{
+  "name": "svg-pathdata-getbbox",
+  "version": "1.0.0",
+  "description": "parse pathdata and get bounding box",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "herrstrietzel",
+  "license": "ISC"
+}
