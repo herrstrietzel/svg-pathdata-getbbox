@@ -329,7 +329,6 @@ var pathDataBB = {};
             cp1.x >= left && cp1.x <= right &&
             cp2.x >= left && cp2.x <= right
         ) {
-            //console.log('no extreme cubic');
             return []
         }
 
@@ -400,7 +399,6 @@ var pathDataBB = {};
             cp1.y >= top && cp1.y <= bottom &&
             cp1.x >= left && cp1.x <= right
         ) {
-            //console.log('no extreme quadratic');
             return []
         }
 
@@ -560,7 +558,6 @@ var pathDataBB = {};
         // analyze pathdata
         let commandTokens = pathData.map(com => { return com.type }).join('')
         let hasShorthands = /[hstv]/gi.test(commandTokens);
-
 
         pathData.forEach((com, i) => {
             let { type, values } = com;

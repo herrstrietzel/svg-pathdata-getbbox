@@ -29,6 +29,46 @@ This script combines multiple non-iterative approaches to find extreme points fo
 Normalization doesn't convert quadratics or arcs to cubics.  
 All in all, this method should be quite fast and accurate.
 
+## Usage - browser
+
+Load script e.g via cdn
+
+```
+<script src="https://cdn.jsdelivr.net/gh/herrstrietzel/svg-pathdata-getbbox@main/index.js"></script>
+```
+
+Or minified version (7KB minified / 4KB gzipped)
+```
+<script src="https://cdn.jsdelivr.net/gh/herrstrietzel/svg-pathdata-getbbox@main/index.min.js"></script>
+```
+
+```
+let d = `
+M3,7 
+L13,7 
+m-10,10 
+l10,0 
+V27 
+H23 
+v10 
+h10
+C 33,43 38,47 43,47 
+c 0,5 5,10 10,10
+S 63,67 63,67       
+s -10,10 10,10
+Q 50,50 73,57
+q 20,-5 0,-10
+T 70,40
+t 0,-15
+A 5, 10 45 1040,20  
+a5,5 20 01 -10,-10
+Z 
+`;
+
+let bb = pathDataBB.getBBoxFromD(d);
+console.log(bb);
+
+```
 
 ## Usage - node.js
 
@@ -65,43 +105,9 @@ var bb = pathDataBB.getBBoxFromD(d);
 console.log(bb)
 ```
 
-## Usage - browser
-
-Load script e.g via cdn
-
-```
-<script src="https://cdn.jsdelivr.net/gh/herrstrietzel/svg-pathdata-getbbox@main/index.js"></script>
-```
-
-```
-let d = `
-M3,7 
-L13,7 
-m-10,10 
-l10,0 
-V27 
-H23 
-v10 
-h10
-C 33,43 38,47 43,47 
-c 0,5 5,10 10,10
-S 63,67 63,67       
-s -10,10 10,10
-Q 50,50 73,57
-q 20,-5 0,-10
-T 70,40
-t 0,-15
-A 5, 10 45 1040,20  
-a5,5 20 01 -10,-10
-Z 
-`;
-
-let bb = pathDataBB.getBBoxFromD(d);
-console.log(bb);
-
-```
-
-See [codepen example](https://codepen.io/herrstrietzel/pen/QWoyYjY?editors=1010) 
+### Examples
+* [multiple bboxes](https://codepen.io/herrstrietzel/pen/QWoyYjY) 
+* [Test bbox calculation ](https://codepen.io/herrstrietzel/pen/zYbqzrz) 
 
 ### Credits
 * Nikos M./foo123 for the algorhythm finding extermes on ellipses.   
