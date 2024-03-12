@@ -34,14 +34,15 @@ All in all, this method should be quite fast and accurate.
 Load script e.g via cdn
 
 ```
-<script src="https://cdn.jsdelivr.net/gh/herrstrietzel/svg-pathdata-getbbox@main/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/herrstrietzel/svg-pathdata-getbbox@main/get-bbox.js"></script>
 ```
 
 Or minified version (7KB minified / 4KB gzipped)
 ```
-<script src="https://cdn.jsdelivr.net/gh/herrstrietzel/svg-pathdata-getbbox@main/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/herrstrietzel/svg-pathdata-getbbox@main/get-bbox.min.js"></script>
 ```
 
+### Example1: get BBox from path d attribute
 ```
 let d = `
 M3,7 
@@ -65,10 +66,19 @@ a5,5 20 01 -10,-10
 Z 
 `;
 
-let bb = pathDataBB.getBBoxFromD(d);
+let bb = getBBoxFromD(d);
 console.log(bb);
 
 ```
+
+### Example2: get BBox from element
+This method actually queries all svg geometry elements within a target and sums up all bbox values to get the total bbox.  
+It also converts shapes like `<rect>`, `<circle>` etc to `<path>` elements to calculate extremes based on pathData. **This method can't retrieve bbox values from `<text>` elements!**
+```
+let bb = getBBoxFromEl(svg)
+```
+
+
 
 ## Usage - node.js
 
