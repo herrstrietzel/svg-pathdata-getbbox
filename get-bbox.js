@@ -4,7 +4,6 @@
 */
 
 var pathDataBB = {};
-
 (function () {
 
     function getBBoxFromEl(el) {
