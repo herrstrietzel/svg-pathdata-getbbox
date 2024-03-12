@@ -1,10 +1,17 @@
-/**
-* self contained alternative to
-* calculate bounding box from pathdata string
-*/
 
-var pathDataBB = {};
-(function () {
+(function (root, factory) {
+    if (typeof module !== 'undefined' && module.exports) {
+        // CommonJS (Node.js) environment
+        module.exports = factory();
+    } else if (typeof define === 'function' && define.amd) {
+        // AMD environment
+        define([], factory);
+    } else {
+        // Browser environment
+        root.pathDataBB = factory();
+    }
+})(this, function () {
+    var pathDataBB = {};
 
     function getBBoxFromEl(el) {
         let geoEls = ['path', 'line', 'polyline', 'polygon', 'circle', 'ellipse', 'rect'];
@@ -14,11 +21,11 @@ var pathDataBB = {};
         let yMin = Infinity
         let yMax = -Infinity
         let geometryEls
-        
+
         //single element
-        if(geoEls.includes(el.nodeName)){
+        if (geoEls.includes(el.nodeName)) {
             geometryEls = [el]
-        }else{
+        } else {
             geometryEls = el.querySelectorAll(`${geoEls.join(', ')}`)
         }
 
@@ -51,6 +58,7 @@ var pathDataBB = {};
         // normalize to absolute coordinates and longhand commands
         let pathData = parsePathDataNormalized(d);
         let bb = getPathDataBBox(pathData);
+        console.log('bbox');
         return bb;
     }
 
@@ -703,32 +711,6 @@ var pathDataBB = {};
         return pathData;
     }
 
-
-    /**
-     * calculate single points on segments
-     */
-    function getPointAtCubicSegmentT(p0, cp1, cp2, p, t = 0.5) {
-        let t1 = 1 - t;
-        return {
-            x: t1 ** 3 * p0.x +
-                3 * t1 ** 2 * t * cp1.x +
-                3 * t1 * t ** 2 * cp2.x +
-                t ** 3 * p.x,
-            y: t1 ** 3 * p0.y +
-                3 * t1 ** 2 * t * cp1.y +
-                3 * t1 * t ** 2 * cp2.y +
-                t ** 3 * p.y
-        };
-    }
-
-    function getPointAtQuadraticSegmentT(p0, cp1, p, t = 0.5) {
-        let t1 = 1 - t;
-        return {
-            x: t1 * t1 * p0.x + 2 * t1 * t * cp1.x + t ** 2 * p.x,
-            y: t1 * t1 * p0.y + 2 * t1 * t * cp1.y + t ** 2 * p.y
-        };
-    }
-
     // retrieve pathdata from svg geometry elements
     function getPathDataFromEl(el) {
         let pathData = [];
@@ -842,7 +824,30 @@ var pathDataBB = {};
         return pathData;
     };
 
+    /**
+     * calculate single points on segments
+     */
+    function getPointAtCubicSegmentT(p0, cp1, cp2, p, t = 0.5) {
+        let t1 = 1 - t;
+        return {
+            x: t1 ** 3 * p0.x +
+                3 * t1 ** 2 * t * cp1.x +
+                3 * t1 * t ** 2 * cp2.x +
+                t ** 3 * p.x,
+            y: t1 ** 3 * p0.y +
+                3 * t1 ** 2 * t * cp1.y +
+                3 * t1 * t ** 2 * cp2.y +
+                t ** 3 * p.y
+        };
+    }
 
+    function getPointAtQuadraticSegmentT(p0, cp1, p, t = 0.5) {
+        let t1 = 1 - t;
+        return {
+            x: t1 * t1 * p0.x + 2 * t1 * t * cp1.x + t ** 2 * p.x,
+            y: t1 * t1 * p0.y + 2 * t1 * t * cp1.y + t ** 2 * p.y
+        };
+    }
 
     function svgElUnitsToPixel(el, decimals = 5) {
         //console.log(this);
@@ -938,38 +943,26 @@ var pathDataBB = {};
         });
     }
 
+    pathDataBB.getBBoxFromEl = getBBoxFromEl;
+    pathDataBB.getBBoxFromD = getBBoxFromD;
+    pathDataBB.getPathDataBBox = getPathDataBBox;
+    pathDataBB.getPathDataFromEl = getPathDataFromEl;
+    pathDataBB.parsePathDataNormalized = parsePathDataNormalized;
+    /*
+    pathDataBB.getArcExtemes = getArcExtemes;
+    pathDataBB.svgArcToCenterParam = svgArcToCenterParam;
+    pathDataBB.getPointAtBezierT = getPointAtBezierT;
+    pathDataBB.getBezierExtremeT = getBezierExtremeT;
+    pathDataBB.cubicBezierExtremeT = cubicBezierExtremeT;
+    pathDataBB.quadraticBezierExtremeT = quadraticBezierExtremeT;
+    pathDataBB.getPointAtCubicSegmentT = getPointAtCubicSegmentT;
+    pathDataBB.getPointAtQuadraticSegmentT = getPointAtQuadraticSegmentT;
+    pathDataBB.svgElUnitsToPixel = svgElUnitsToPixel;
+    */
 
-
-    if (typeof module !== 'undefined' && module.exports) {
-        module.exports = {
-            getBBoxFromEl,
-            getBBoxFromD,
-            getPathDataBBox,
-            getArcExtemes,
-            svgArcToCenterParam,
-            getPointAtBezierT,
-            getBezierExtremeT,
-            cubicBezierExtremeT,
-            quadraticBezierExtremeT,
-            getPointAtQuadraticSegmentT
-        }
-    }
-    else {
-        pathDataBB.getBBoxFromEl = getBBoxFromEl
-        pathDataBB.getBBoxFromD = getBBoxFromD
-        pathDataBB.getPathDataBBox = getPathDataBBox
-        pathDataBB.getArcExtemes = getArcExtemes
-        pathDataBB.svgArcToCenterParam = svgArcToCenterParam
-        pathDataBB.getPointAtBezierT = getPointAtBezierT
-        pathDataBB.getBezierExtremeT = getBezierExtremeT
-        pathDataBB.cubicBezierExtremeT = cubicBezierExtremeT
-        pathDataBB.quadraticBezierExtremeT = quadraticBezierExtremeT
-        pathDataBB.getPointAtQuadraticSegmentT = getPointAtQuadraticSegmentT
-    }
-
-})()
+    return pathDataBB;
+});
 
 if (typeof module === 'undefined') {
-    var { getBBoxFromEl, getBBoxFromD, getPathDataBBox } = pathDataBB;
+    var { getBBoxFromEl, getBBoxFromD, getPathDataBBox, getPathDataFromEl, parsePathDataNormalized } = pathDataBB;
 }
-

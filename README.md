@@ -88,6 +88,8 @@ npm install svg-pathdata-getbbox
 
 ```
 var pathDataBB = require("svg-pathdata-getbbox");
+var { getBBoxFromEl, getBBoxFromD, getPathDataBBox } = pathDataBB;
+
 
 var d = `
 M3,7 
@@ -111,7 +113,7 @@ a5,5 20 01 -10,-10
 Z 
 `;
 
-var bb = pathDataBB.getBBoxFromD(d);
+var bb = getBBoxFromD(d);
 console.log(bb)
 ```
 
