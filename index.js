@@ -705,6 +705,7 @@ var pathDataBB = {};
     }
     else {
         pathDataBB.getBBoxFromD = getBBoxFromD
+        pathDataBB.getPathDataBBox = getPathDataBBox
         pathDataBB.parseDtoPathData = parseDtoPathData
         pathDataBB.pathDataToLonghands = pathDataToLonghands
         pathDataBB.getArcExtemes = getArcExtemes
