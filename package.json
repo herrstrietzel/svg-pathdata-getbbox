@@ -1,6 +1,6 @@
 {
   "name": "svg-pathdata-getbbox",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "parse pathdata and get bounding box",
   "main": "get-bbox.js",
   "repository": {

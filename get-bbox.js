@@ -738,13 +738,12 @@
                 attNames = ['x', 'y', 'width', 'height', 'rx', 'ry'];
                 ({ x, y, width, height, rx, ry } = getAtts(attNames));
 
-
                 if (!rx && !ry) {
                     pathData = [
                         { type: "M", values: [x, y] },
-                        { type: "H", values: [x + width] },
-                        { type: "V", values: [y + height] },
-                        { type: "H", values: [x] },
+                        { type: "L", values: [x + width, y] },
+                        { type: "L", values: [x + width, y + height] },
+                        { type: "H", values: [x, y + height] },
                         { type: "Z", values: [] }
                     ];
                 } else {
@@ -758,13 +757,13 @@
 
                     pathData = [
                         { type: "M", values: [x + rx, y] },
-                        { type: "H", values: [x + width - rx] },
+                        { type: "L", values: [x + width - rx, y] },
                         { type: "A", values: [rx, ry, 0, 0, 1, x + width, y + ry] },
-                        { type: "V", values: [y + height - ry] },
+                        { type: "L", values: [x + width - rx, y + height - ry] },
                         { type: "A", values: [rx, ry, 0, 0, 1, x + width - rx, y + height] },
-                        { type: "H", values: [x + rx] },
+                        { type: "L", values: [x + rx, y + height] },
                         { type: "A", values: [rx, ry, 0, 0, 1, x, y + height - ry] },
-                        { type: "V", values: [y + ry] },
+                        { type: "L", values: [x, y + ry] },
                         { type: "A", values: [rx, ry, 0, 0, 1, x + rx, y] },
                         { type: "Z", values: [] }
                     ];

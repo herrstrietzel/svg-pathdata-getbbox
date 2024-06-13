@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        svg {
+            border: 1px solid red;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 20em;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+        <!--
+      -->
+        <ellipse id="r" cx="25%" cy="25%" rx="25%" ry="25%" fill="#D9D9D9" />
+        <rect id="rect" x="50%" y="2em" rx="5%" ry="1em" width="20%" height="3cm" />
+    </svg>
+
+    <h3>Output</h3>
+    <textarea id="output"></textarea>
+
+
+    <script src="../get-bbox.js"></script>
+
+    <script>
+
+        let svg = document.querySelector('svg')
+        let els = svg.querySelectorAll('path, polygon, polyline, line, circle, ellipse, rect')
+
+        let bb = getBBoxFromEl(svg)
+
+        els.forEach(el => {
+            //svgElUnitsToPixel(el, 3)
+        })
+
+        let bbr = getBBoxFromEl(rect)
+        console.log(bb, bbr)
+
+        svg.setAttribute('viewBox', [bb.x, bb.y, bb.width, bb.height].join(' '))
+
+        output.value = new XMLSerializer().serializeToString(svg)
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
