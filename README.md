@@ -118,6 +118,7 @@ console.log(bb)
 ```
 
 ### Examples
+* [bbox from svg (multiple elements)](https://codepen.io/herrstrietzel/pen/ExzbEqZ)
 * [multiple bboxes](https://codepen.io/herrstrietzel/pen/QWoyYjY) 
 * [Test bbox calculation ](https://codepen.io/herrstrietzel/pen/zYbqzrz) 
 
