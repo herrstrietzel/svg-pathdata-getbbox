@@ -497,7 +497,7 @@
         let comLengths = { m: 2, a: 7, c: 6, h: 1, l: 2, q: 4, s: 4, t: 2, v: 1, z: 0 };
 
         // offsets for absolute conversion
-        let offX, offY, lastX, lastY;
+        let offX, offY, lastX, lastY, M;
 
         for (let c = 0; c < commands.length; c++) {
             let com = commands[c];
@@ -571,6 +571,7 @@
                 offY = values[1];
                 lastX = offX;
                 lastY = offY;
+                M = { x: values[0], y: values[1] };
             }
 
             let typeFirst = comChunks[0].type;
@@ -622,6 +623,10 @@
                         case "m":
                         case "l":
                         case "t":
+                            //update last M
+                            if (type === 'm') {
+                                M = { x: values[0] + offX, y: values[1] + offY };
+                            }
                             com.values = [values[0] + offX, values[1] + offY];
                             break;
 
@@ -645,6 +650,14 @@
                                 values[3] + offY
                             ];
                             break;
+
+                        case 'z':
+                        case 'Z':
+                            lastX = M.x;
+                            lastY = M.y;
+                            break;
+
+
                     }
                 }
                 // is absolute
