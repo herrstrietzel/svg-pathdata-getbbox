@@ -719,6 +719,7 @@
 
         // convert relative or absolute units 
         svgElUnitsToPixel(el)
+        //console.log(el)
 
         const getAtts = (attNames) => {
             atts = {}
@@ -738,12 +739,13 @@
                 attNames = ['x', 'y', 'width', 'height', 'rx', 'ry'];
                 ({ x, y, width, height, rx, ry } = getAtts(attNames));
 
+
                 if (!rx && !ry) {
                     pathData = [
                         { type: "M", values: [x, y] },
-                        { type: "L", values: [x + width, y] },
-                        { type: "L", values: [x + width, y + height] },
-                        { type: "H", values: [x, y + height] },
+                        { type: "H", values: [x + width] },
+                        { type: "V", values: [y + height] },
+                        { type: "H", values: [x] },
                         { type: "Z", values: [] }
                     ];
                 } else {
@@ -941,6 +943,7 @@
             }
         });
     }
+
 
     pathDataBB.getBBoxFromEl = getBBoxFromEl;
     pathDataBB.getBBoxFromD = getBBoxFromD;
